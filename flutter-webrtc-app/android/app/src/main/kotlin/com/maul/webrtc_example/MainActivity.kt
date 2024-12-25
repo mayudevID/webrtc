@@ -1,4 +1,4 @@
-package com.example.flutter_webrtc_app
+package com.maul.webrtc_example
 
 import io.flutter.embedding.android.FlutterActivity
 
