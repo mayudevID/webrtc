@@ -65,7 +65,10 @@ class _CallScreenState extends State<CallScreen> {
         {
           'urls': [
             'stun:stun1.l.google.com:19302',
-            'stun:stun2.l.google.com:19302'
+            'stun:stun2.l.google.com:19302',
+            'stun:stun2.l.google.com:19302',
+            'stun:stun3.l.google.com:19302',
+            'stun:stun4.l.google.com:19302'
           ]
         }
       ]
@@ -98,7 +101,7 @@ class _CallScreenState extends State<CallScreen> {
     log("{} calleeId: ${widget.calleeId}");
     log("{} offer: ${widget.offer}");
 
-    //* ======================== for Incoming Call ========================
+    //* ===================== for Incoming Call (Offer Not NULL) ========================
     if (widget.offer != null) {
       // listen for Remote IceCandidate
       socket!.on("IceCandidate", (data) {

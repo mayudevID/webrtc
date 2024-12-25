@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'call_screen.dart';
 import '../services/signalling.service.dart';
@@ -21,6 +23,7 @@ class _JoinScreenState extends State<JoinScreen> {
 
     // listen for incoming video call
     SignallingService.instance.socket!.on("newCall", (data) {
+      log("{} New Call: $data");
       if (mounted) {
         // set SDP Offer of incoming call
         setState(() => incomingSDPOffer = data);
