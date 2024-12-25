@@ -13,7 +13,7 @@ class VideoCallApp extends StatelessWidget {
   VideoCallApp({super.key});
 
   // signalling server url
-  final String websocketUrl = "103.175.221.238";
+  final String websocketUrl = "ws://103.175.221.238:5000/";
 
   // generate callerID of local user
   final String selfCallerID =

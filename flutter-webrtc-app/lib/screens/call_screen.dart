@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import '../services/signalling.service.dart';
@@ -92,10 +94,15 @@ class _CallScreenState extends State<CallScreen> {
     _localRTCVideoRenderer.srcObject = _localStream;
     setState(() {});
 
-    // for Incoming call
+    log("{} caleerId: ${widget.callerId}");
+    log("{} calleeId: ${widget.calleeId}");
+    log("{} offer: ${widget.offer}");
+
+    //* ======================== for Incoming Call ========================
     if (widget.offer != null) {
       // listen for Remote IceCandidate
       socket!.on("IceCandidate", (data) {
+        log("{} IceCandidate: $data");
         String candidate = data["iceCandidate"]["candidate"];
         String sdpMid = data["iceCandidate"]["id"];
         int sdpMLineIndex = data["iceCandidate"]["label"];
@@ -125,7 +132,7 @@ class _CallScreenState extends State<CallScreen> {
         "sdpAnswer": answer.toMap(),
       });
     }
-    // for Outgoing Call
+    //* ======================== for Outgoing Call ========================
     else {
       // listen for local iceCandidate and add it to the list of IceCandidate
       _rtcPeerConnection!.onIceCandidate =
@@ -133,6 +140,7 @@ class _CallScreenState extends State<CallScreen> {
 
       // when call is accepted by remote peer
       socket!.on("callAnswered", (data) async {
+        log("{} callAnswered: $data");
         // set SDP answer as remoteDescription for peerConnection
         await _rtcPeerConnection!.setRemoteDescription(
           RTCSessionDescription(

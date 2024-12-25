@@ -13,7 +13,7 @@ class SignallingService {
     socket = io(websocketUrl, {
       "transports": ['websocket'],
       "query": {"callerId": selfCallerID}
-    });
+    }).timeout(5000);
 
     // listen onConnect event
     socket!.onConnect((data) {
